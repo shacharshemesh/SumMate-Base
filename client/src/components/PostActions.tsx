@@ -1,6 +1,5 @@
 import { FaComment, FaHeart } from "react-icons/fa";
 import { PostComment } from "../interfaces/comment";
-import { useNavigate } from "react-router-dom";
 
 interface PostActionsProps {
   postId: string;
@@ -12,14 +11,11 @@ interface PostActionsProps {
 }
 
 const PostActions = ({
-  postId,
   likesNumber,
   likedByUser,
   comments,
   onLikeToggle,
-  inFeed,
 }: PostActionsProps) => {
-  const navigate = useNavigate();
 
   return (
     <div className="post-actions row">
@@ -38,7 +34,6 @@ const PostActions = ({
       <div className="col-5">
         <button
           className={"btn btn-light text-secondary"}
-          onClick={() => inFeed ? navigate(`/post/${postId}`) : null}
           style={{ border: "none", background: "transparent", padding: "3px" }}
         >
           <FaComment size={25} />

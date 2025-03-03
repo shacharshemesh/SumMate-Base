@@ -2,7 +2,6 @@ import { useState } from "react";
 import PostActions from "./PostActions";
 import { Post } from "../interfaces/post";
 import DropzoneComponent from "./Dropzone";
-import { useNavigate } from "react-router-dom";
 import { IMAGES_URL } from "../constants/files";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import { useUserContext } from "../context/UserContext";
@@ -22,7 +21,6 @@ const PostComponent = ({ post, enableChanges, inFeed }: PostProps) => {
   const [editedPhotoURL, setEditedPhotoURL] = useState<string | null>();
   const { user } = useUserContext() ?? {};
   const { setPosts, posts } = usePostsContext() ?? {};
-  const navigate = useNavigate();
 
   const isLikedByCurrUser = (): boolean => {
     return post.likedBy.find((currUser) => currUser?._id === user?._id)
@@ -133,7 +131,7 @@ const PostComponent = ({ post, enableChanges, inFeed }: PostProps) => {
           height: "400px"
         }}
       >
-        <div className="d-flex align-items-center mb-1" onClick={() => navigate("/profile/" + post.owner._id)}>
+        <div className="d-flex align-items-center mb-1">
           <img
             src={
               post.owner.photo
@@ -168,7 +166,6 @@ const PostComponent = ({ post, enableChanges, inFeed }: PostProps) => {
           <div
             {...(inFeed
               ? {
-                onClick: () => navigate(`/post/${post._id}`),
                 style: { cursor: "pointer" },
               }
               : {})}
