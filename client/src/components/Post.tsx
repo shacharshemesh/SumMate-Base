@@ -80,6 +80,8 @@ const PostComponent = ({ post, enableChanges, inFeed }: PostProps) => {
     setIsEditing(false);
   };
 
+  const connectedUserName = post.owner?.username || "Gest";
+
   return (
     <div
       className="post card mb-3"
@@ -136,15 +138,15 @@ const PostComponent = ({ post, enableChanges, inFeed }: PostProps) => {
         <div className="d-flex align-items-center mb-1" onClick={() => navigate("/profile/" + post.owner._id)}>
           <img
             src={
-              post.owner.photo
+              post.owner?.photo
                 ? IMAGES_URL + post.owner.photo
                 : "/temp-user.png"
             }
-            alt={post.owner.username}
+            alt={connectedUserName}
             className="rounded-circle user-photo m-2"
             style={{ width: "20px", height: "20px" }}
           />
-          <span className="ml-3">{post.owner.username}</span>
+          <span className="ml-3">{connectedUserName}</span>
         </div>
 
         {isEditing ? (
