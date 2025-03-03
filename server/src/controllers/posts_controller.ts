@@ -42,20 +42,6 @@ const getPostById = async (req: Request, res: Response) => {
   }
 };
 
-const createPost = async (req: Request, res: Response) => {
-  try {
-    await uploadFile(req, res);
-    const post: Post = JSON.parse(req.body.post);
-    post.photoSrc = req.file?.filename;
-    await PostModel.create(post);
-
-    res.status(201).send();
-  } catch (error) {
-    req.file?.filename && deleteFile(req.file.filename);
-    res.status(500).send(error.message);
-  }
-};
-
 const updatePost = async (req: Request, res: Response) => {
   try {
     await uploadFile(req, res);
@@ -107,4 +93,4 @@ const deletePostById = async (req: Request, res: Response) => {
   }
 };
 
-export { getAllPosts, getPostById, createPost, updatePost, deletePostById };
+export { getAllPosts, getPostById, updatePost, deletePostById };
