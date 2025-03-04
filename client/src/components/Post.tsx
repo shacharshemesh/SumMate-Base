@@ -25,9 +25,7 @@ const PostComponent = ({ post, enableChanges, inFeed }: PostProps) => {
   const navigate = useNavigate();
 
   const isLikedByCurrUser = (): boolean => {
-    return post.likedBy.find((currUser) => currUser?._id === user?._id)
-      ? true
-      : false;
+    return !!post.likedBy.find((currUser) => currUser?._id === user?._id)
   };
   const onEditSave = () => {
     updatePost(post._id, { photo: editedPhoto, content: description });
